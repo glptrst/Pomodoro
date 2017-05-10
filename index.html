@@ -4,6 +4,7 @@
 <head>
     <link rel="stylesheet" href="css/bootstrap.min.css"> 
     <link rel="stylesheet" href="css/style.css"> 
+    <script src="js/pomodoro.js"></script>
     <title>Pomodoro App</title>
 </head>
 <body>
@@ -15,12 +16,12 @@
   <h2>Pomodoro</h2>
   <div class="col-md-4 text-right">
 
-   <button type="button" class="btn btn-success">Start</button>
+   <button type="button" class="btn btn-success" id="startPomodoro">Start</button>
 
   </div>
   <div class="col-md-4">
 
-   25.00 
+   <span id="pomodoroDigits">22:00</span>
 
   </div>
   <div class="col-md-4 text-left">
@@ -47,7 +48,7 @@
   </div>
   <div class="col-md-4">
 
-   25.00 
+   25
 
   </div>
   <div class="col-md-4 text-left">
