@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/style.css"> 
     <script src="js/pomodoro.js"></script>
     <title>Pomodoro App</title>
+    <audio id="buzzer" src="sounds/buzzer.mp3" type="audio/mpeg"></audio>
 </head>
 <body>
 
@@ -21,7 +22,9 @@
   </div>
   <div class="col-md-4">
 
-   <span id="pomodoroDigits">25:00</span>
+   <a class="btn btn-default" id="pomodorMinus">-</a>
+   <span id="pomodoroDigits">00:05</span>
+   <a class="btn btn-default" id="pomodoroPlus">+</a>
 
   </div>
   <div class="col-md-4 text-left">
@@ -48,7 +51,7 @@
   </div>
   <div class="col-md-4">
 
-  <span id="breakDigits">05:00</span>
+  <span id="breakDigits">00:05</span>
 
   </div>
   <div class="col-md-4 text-left">

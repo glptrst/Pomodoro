@@ -1,7 +1,11 @@
+"use strict"
 window.onload = function () {
     //store intervalID;
     var pomodoroCountdown;
     var breakCountdown; 
+
+    // Sound
+    var buzzer = document.getElementById('buzzer');
 
     // Call startCountDown when pomodoro start button is clicked 
     document.getElementById("startPomodoro").addEventListener('click', function startCountDown() {
@@ -24,8 +28,8 @@ window.onload = function () {
 		//Stop calling updateDigits every second
 		clearInterval(pomodoroCountdown);
 
-		// Play a sound also !
-		//      TODO
+		// Play a sound
+		buzzer.play();
 	    }
 	    var newMinutes = Math.floor(totalSeconds / 60);
 	    var newSeconds = totalSeconds % 60;
@@ -66,7 +70,16 @@ window.onload = function () {
 	pomodoroDigitsTextNode = newTextNode;
     });
 
+    document.getElementById("pomodoroPlus").addEventListener('click', function increasePomodoro() {
+	//TODO
+    });
+    document.getElementById("pomodoroMinus").addEventListener('click', function decreasePomodoro() {
+	//TODO
+    });
+    
 
+
+    
     // Do the same for the break functionality
 
     
@@ -91,8 +104,8 @@ window.onload = function () {
 		//Stop calling updateDigits every second
 		clearInterval(breakCountdown);
 
-		// Play a sound also !
-		//      TODO
+		// Play a sound
+		buzzer.play();
 	    }
 	    var newMinutes = Math.floor(totalSeconds / 60);
 	    var newSeconds = totalSeconds % 60;
