@@ -19,7 +19,13 @@ window.onload = function () {
 	var seconds = Number(pomodoroDigitsString.slice(3,5));
 	var totalSeconds = minutes*60 + seconds;
 
-	//Every second call updateDigits
+	// Hide minus and plus
+	var minus = document.getElementById('pomodoroMinus');  
+	minus.style.display = 'none';
+	var plus = document.getElementById('pomodoroPlus');  
+	plus.style.display = 'none';
+
+	// Every second call updateDigits
 	pomodoroCountdown = setInterval( function updateDigits() { 
 	    // Update digits string
 	    totalSeconds -= 1;
@@ -42,7 +48,7 @@ window.onload = function () {
 	    // **********Change string in the page**********
 	    // Create new text node
 	    var newTextNode = document.createTextNode(newDigitsString);
-	    //replace old text node with the new one
+	    // Replace old text node with the new one
 	    pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
 	    // Make new node the current node (so the replacement occurs correctly in the next call)
 	    pomodoroDigitsTextNode = newTextNode;
@@ -54,6 +60,11 @@ window.onload = function () {
     });
 
     document.getElementById("resetPomodoro").addEventListener('click', function resetPomodoro() {
+	var minus = document.getElementById('pomodoroMinus');  
+	minus.style.display = '';
+	var plus = document.getElementById('pomodoroPlus');  
+	plus.style.display = '';
+
 	//Check if we can avoid re-declaring the variables below
 	// TODO
 
@@ -80,14 +91,17 @@ window.onload = function () {
 	var minutes = Number(pomodoroDigitsString.slice(0,2)); 
 	var seconds = Number(pomodoroDigitsString.slice(3,5));
 	minutes += 1;
-	if (String(minutes).length < 2)
-	    minutes = '0' + minutes;
-	if (String(seconds).length < 2)
-	    seconds = '0' + seconds;
-
-	var decreased = document.createTextNode(minutes + ':' + seconds);
-	pomodoroDigitsEl.replaceChild(decreased, pomodoroDigitsTextNode);
-	pomodoroDigitsTextNode = decreased;
+	if (minutes > 35) {
+	    ; // You can't set a pomodoro to be more than 35 minutes! 
+	} else {
+	    if (String(minutes).length < 2)
+		minutes = '0' + minutes;
+	    if (String(seconds).length < 2)
+		seconds = '0' + seconds;
+	    var decreased = document.createTextNode(minutes + ':' + seconds);
+	    pomodoroDigitsEl.replaceChild(decreased, pomodoroDigitsTextNode);
+	    pomodoroDigitsTextNode = decreased;
+	}
     });
 
     document.getElementById("pomodoroMinus").addEventListener('click', function decreasePomodoro() {
@@ -101,13 +115,16 @@ window.onload = function () {
 	var minutes = Number(pomodoroDigitsString.slice(0,2)); 
 	var seconds = Number(pomodoroDigitsString.slice(3,5));
 	minutes -= 1;
-	if (String(minutes).length < 2)
-	    minutes = '0' + minutes;
-	if (String(seconds).length < 2)
-	    seconds = '0' + seconds;
-
-	var decreased = document.createTextNode(minutes + ':' + seconds);
-	pomodoroDigitsEl.replaceChild(decreased, pomodoroDigitsTextNode);
-	pomodoroDigitsTextNode = decreased;
+	if (minutes < 1) {
+	    ; //You can't set a pomodoro to be less than 1 minute!
+	} else {
+	    if (String(minutes).length < 2)
+		minutes = '0' + minutes;
+	    if (String(seconds).length < 2)
+		seconds = '0' + seconds;
+	    var decreased = document.createTextNode(minutes + ':' + seconds);
+	    pomodoroDigitsEl.replaceChild(decreased, pomodoroDigitsTextNode);
+	    pomodoroDigitsTextNode = decreased;
+	}
     });
 }
