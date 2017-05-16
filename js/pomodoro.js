@@ -55,18 +55,18 @@ window.onload = function () {
 	}, 1000);
     });
 
+    // Stop countdown when stop is clicked 
     document.getElementById("stopPomodoro").addEventListener('click', function stopCountDown() {
 	clearInterval(pomodoroCountdown);
     });
 
+    // Reset pomodoro when reset is clicked
     document.getElementById("resetPomodoro").addEventListener('click', function resetPomodoro() {
+	// Make minus and plus buttons visible (in the case their display property was set to 'none')
 	var minus = document.getElementById('pomodoroMinus');  
 	minus.style.display = '';
 	var plus = document.getElementById('pomodoroPlus');  
 	plus.style.display = '';
-
-	//Check if we can avoid re-declaring the variables below
-	// TODO
 
 	// Pomodoro digits html Element
 	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
@@ -74,12 +74,13 @@ window.onload = function () {
 	var pomodoroDigitsTextNode = pomodoroDigitsEl.lastChild;  
 	// Pomodoro digits string (nodevalue)
 	var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
-	clearInterval(pomodoroCountdown); // in case the countdown is active
+	clearInterval(pomodoroCountdown); // in the case the countdown is active
+	// Create new text node and replae old one
 	var newTextNode = document.createTextNode('25:00');
 	pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
-	pomodoroDigitsTextNode = newTextNode;
     });
 
+    // Increase pomodoro by one minute when click on plus
     document.getElementById("pomodoroPlus").addEventListener('click', function increasePomodoro() {
 	// Pomodoro digits html Element
 	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
@@ -94,16 +95,18 @@ window.onload = function () {
 	if (minutes > 35) {
 	    ; // You can't set a pomodoro to be more than 35 minutes! 
 	} else {
+	    // Always display minutes and seconds in a two-digit format
 	    if (String(minutes).length < 2)
 		minutes = '0' + minutes;
 	    if (String(seconds).length < 2)
 		seconds = '0' + seconds;
-	    var decreased = document.createTextNode(minutes + ':' + seconds);
-	    pomodoroDigitsEl.replaceChild(decreased, pomodoroDigitsTextNode);
-	    pomodoroDigitsTextNode = decreased;
+	    // Create new text node and replace the old one
+	    var increased = document.createTextNode(minutes + ':' + seconds);
+	    pomodoroDigitsEl.replaceChild(increased, pomodoroDigitsTextNode);
 	}
     });
 
+    // Decrease pomodoro by one minute when click on minus
     document.getElementById("pomodoroMinus").addEventListener('click', function decreasePomodoro() {
 	// Pomodoro digits html Element
 	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
@@ -118,13 +121,14 @@ window.onload = function () {
 	if (minutes < 1) {
 	    ; //You can't set a pomodoro to be less than 1 minute!
 	} else {
+	    // Always display minutes and seconds in a two-digit format
 	    if (String(minutes).length < 2)
 		minutes = '0' + minutes;
 	    if (String(seconds).length < 2)
 		seconds = '0' + seconds;
+	    // Create new text node and replace the old one
 	    var decreased = document.createTextNode(minutes + ':' + seconds);
 	    pomodoroDigitsEl.replaceChild(decreased, pomodoroDigitsTextNode);
-	    pomodoroDigitsTextNode = decreased;
 	}
     });
 }
