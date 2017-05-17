@@ -9,3 +9,8 @@ h1 {
 #breakClock {
     margin: 50px;
 }
+
+#tasksList {
+    width: 30%;
+    margin: 0 auto;
+}

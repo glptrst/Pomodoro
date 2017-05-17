@@ -1,6 +1,10 @@
 "use strict"
 window.onload = function () {
-    //store intervalID;
+
+    // Task 
+    var task;
+
+    // Store intervalID;
     var pomodoroCountdown;
 
     // Sound
@@ -8,6 +12,9 @@ window.onload = function () {
 
     // Call startCountDown when pomodoro start button is clicked 
     document.getElementById("startPomodoro").addEventListener('click', function startCountDown() {
+	// Set task variable
+	task = document.getElementById('task').value;
+
 	// Pomodoro digits html Element
 	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
 	// Pomodoro digits text node
@@ -30,11 +37,18 @@ window.onload = function () {
 	    // Update digits string
 	    totalSeconds -= 1;
 	    if (totalSeconds < 1) {
-		//Stop calling updateDigits every second
+		// Stop calling updateDigits every second
 		clearInterval(pomodoroCountdown);
 
 		// Play a sound
 		buzzer.play();
+
+		// Insert task into done
+		// TODO
+		var doneList = document.getElementById('done');
+		var lastTaskDone = document.createElement('li');
+		lastTaskDone.appendChild(document.createTextNode(task));
+		doneList.appendChild(lastTaskDone);
 	    }
 	    var newMinutes = Math.floor(totalSeconds / 60);
 	    var newSeconds = totalSeconds % 60;

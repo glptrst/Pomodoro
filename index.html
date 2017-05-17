@@ -16,19 +16,33 @@
 <div id="pomodoroClock">
   <h2>Pomodoro</h2>
 
-   <button type="button" class="btn btn-success" id="startPomodoro">Start</button>
-
-   <a class="btn btn-default" id="pomodoroMinus">-</a>
-   <span id="pomodoroDigits">25:00</span>
-   <a class="btn btn-default" id="pomodoroPlus">+</a>
+    <div>
+	<form class=form-inline>
+	<label for="task">Task</label>
+	<input type="text" class="form-control" id="task" placeholder="Untitled">
+	</form>
+    </div>
   
-   <button type="button" class="btn btn-warning" id="stopPomodoro">stop</button>
+    <button type="button" class="btn btn-success" id="startPomodoro">Start</button>
+
+    <a class="btn btn-default" id="pomodoroMinus">-</a>
+    <span id="pomodoroDigits">00:03</span>
+    <a class="btn btn-default" id="pomodoroPlus">+</a>
+  
+    <button type="button" class="btn btn-warning" id="stopPomodoro">stop</button>
 
 
-   <div>
-    <button type="button" class="btn btn-danger" id="resetPomodoro">Reset</button>
-   </div>
+    <div>
+	<button type="button" class="btn btn-danger" id="resetPomodoro">Reset</button>
+    </div>
+
+
 </div> <!-- pomodorClock -->
+
+    <div class="text-right" id="tasksList">
+	<ol id="done">
+	</ol>
+    </div>
 
 </div> <!-- container -->
 
