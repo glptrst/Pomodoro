@@ -11,6 +11,8 @@ h1 {
 }
 
 #tasksList {
+    background-color: #A6AAA7;
     width: 30%;
     margin: 0 auto;
+    border-radius: 5px;
 }

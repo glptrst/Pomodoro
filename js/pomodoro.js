@@ -10,11 +10,11 @@ window.onload = function () {
     // Sound
     var buzzer = document.getElementById('buzzer');
 
+    // Flag for pomodoro
+    var pomodoroIsOn = false;
+
     // Call startCountDown when pomodoro start button is clicked 
     document.getElementById("startPomodoro").addEventListener('click', function startCountDown() {
-	// Set task variable
-	task = document.getElementById('task').value;
-
 	// Pomodoro digits html Element
 	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
 	// Pomodoro digits text node
@@ -22,51 +22,66 @@ window.onload = function () {
 	// Pomodoro digits string (nodevalue)
 	var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
 
-	var minutes = Number(pomodoroDigitsString.slice(0,2)); 
-	var seconds = Number(pomodoroDigitsString.slice(3,5));
-	var totalSeconds = minutes*60 + seconds;
+	if (pomodoroDigitsString === '00:00') { // If counter is 00.00
+	    ; // Do nothing
+	} else if (pomodoroIsOn) {
+	    ; // Do nothing
+	}
+	else { // Start pomodoro
+	    // Change flag
+	    pomodoroIsOn = true;
 
-	// Hide minus and plus
-	var minus = document.getElementById('pomodoroMinus');  
-	minus.style.display = 'none';
-	var plus = document.getElementById('pomodoroPlus');  
-	plus.style.display = 'none';
+	    // Set task variable
+	    task = document.getElementById('task').value;
 
-	// Every second call updateDigits
-	pomodoroCountdown = setInterval( function updateDigits() { 
-	    // Update digits string
-	    totalSeconds -= 1;
-	    if (totalSeconds < 1) {
-		// Stop calling updateDigits every second
-		clearInterval(pomodoroCountdown);
+	    var minutes = Number(pomodoroDigitsString.slice(0,2)); 
+	    var seconds = Number(pomodoroDigitsString.slice(3,5));
+	    var totalSeconds = minutes*60 + seconds;
 
-		// Play a sound
-		buzzer.play();
+	    // Hide minus and plus
+	    var minus = document.getElementById('pomodoroMinus');  
+	    minus.style.display = 'none';
+	    var plus = document.getElementById('pomodoroPlus');  
+	    plus.style.display = 'none';
 
-		// Insert task into done
-		// TODO
-		var doneList = document.getElementById('done');
-		var lastTaskDone = document.createElement('li');
-		lastTaskDone.appendChild(document.createTextNode(task));
-		doneList.appendChild(lastTaskDone);
-	    }
-	    var newMinutes = Math.floor(totalSeconds / 60);
-	    var newSeconds = totalSeconds % 60;
-	    // Always display minutes and seconds in a two-digit format
-	    if (String(newMinutes).length < 2)
-		newMinutes = '0' + newMinutes;
-	    if (String(newSeconds).length < 2)
-		newSeconds = '0' + newSeconds;
-	    // Create updated digits string 
-	    var newDigitsString = newMinutes + ':' + newSeconds;
-	    // **********Change string in the page**********
-	    // Create new text node
-	    var newTextNode = document.createTextNode(newDigitsString);
-	    // Replace old text node with the new one
-	    pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
-	    // Make new node the current node (so the replacement occurs correctly in the next call)
-	    pomodoroDigitsTextNode = newTextNode;
-	}, 1000);
+	    // Every second call updateDigits
+	    pomodoroCountdown = setInterval( function updateDigits() { 
+		// Update digits string
+		totalSeconds -= 1;
+		if (totalSeconds < 1) {
+		    // Stop calling updateDigits every second
+		    clearInterval(pomodoroCountdown);
+
+		    // Play a sound
+		    buzzer.play();
+
+		    // Insert task into done
+		    var noTaskDoneEl = document.getElementById('noTaskDone');
+		    if (noTaskDoneEl !== null)
+			noTaskDoneEl.remove();
+		    var doneList = document.getElementById('done');
+		    var lastTaskDone = document.createElement('li');
+		    lastTaskDone.appendChild(document.createTextNode(task));
+		    doneList.appendChild(lastTaskDone);
+		}
+		var newMinutes = Math.floor(totalSeconds / 60);
+		var newSeconds = totalSeconds % 60;
+		// Always display minutes and seconds in a two-digit format
+		if (String(newMinutes).length < 2)
+		    newMinutes = '0' + newMinutes;
+		if (String(newSeconds).length < 2)
+		    newSeconds = '0' + newSeconds;
+		// Create updated digits string 
+		var newDigitsString = newMinutes + ':' + newSeconds;
+		// **********Change string in the page**********
+		// Create new text node
+		var newTextNode = document.createTextNode(newDigitsString);
+		// Replace old text node with the new one
+		pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
+		// Make new node the current node (so the replacement occurs correctly in the next call)
+		pomodoroDigitsTextNode = newTextNode;
+	    }, 1000);
+	}
     });
 
     // Stop countdown when stop is clicked 
@@ -76,6 +91,9 @@ window.onload = function () {
 
     // Reset pomodoro when reset is clicked
     document.getElementById("resetPomodoro").addEventListener('click', function resetPomodoro() {
+	// Change flag
+	pomodoroIsOn = false;
+
 	// Make minus and plus buttons visible (in the case their display property was set to 'none')
 	var minus = document.getElementById('pomodoroMinus');  
 	minus.style.display = '';
@@ -90,7 +108,7 @@ window.onload = function () {
 	var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
 	clearInterval(pomodoroCountdown); // in the case the countdown is active
 	// Create new text node and replae old one
-	var newTextNode = document.createTextNode('25:00');
+	var newTextNode = document.createTextNode('00:02');
 	pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
     });
 
