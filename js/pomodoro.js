@@ -3,7 +3,7 @@ window.onload = function () {
     // Task 
     var task;
 
-    // Store intervalID;
+    // Store timeoutID;
     var pomodoroCountdown;
 
     // Sound
@@ -47,7 +47,7 @@ window.onload = function () {
 	    // Accurate timer: https://stackoverflow.com/questions/29971898/how-to-create-an-accurate-timer-in-javascript
 	    var interval = 1000; //ms
 	    var expected = Date.now() + interval;
-	    setTimeout(step, interval);
+	    pomodoroCountdown = setTimeout(step, interval);
 	    function step() {
 		var dt = Date.now() - expected; //the drift
 		if (dt > interval) {
@@ -87,14 +87,15 @@ window.onload = function () {
 		pomodoroDigitsTextNode = newTextNode;
 
 		expected += interval;
-		setTimeout(step, Math.max(0, interval - dt)); // take drift into account
+		pomodoroCountdown = setTimeout(step, Math.max(0, interval - dt)); // take drift into account
 	    }
 	}
     });
 
     // Stop countdown when stop is clicked 
     document.getElementById("stopPomodoro").addEventListener('click', function stopCountDown() {
-	clearInterval(pomodoroCountdown);
+	clearTimeout(pomodoroCountdown);
+	pomodoroIsOn = false;
     });
 
     // Reset pomodoro when reset is clicked
@@ -114,7 +115,7 @@ window.onload = function () {
 	var pomodoroDigitsTextNode = pomodoroDigitsEl.lastChild;  
 	// Pomodoro digits string (nodevalue)
 	var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
-	clearInterval(pomodoroCountdown); // in the case the countdown is active
+	clearTimeout(pomodoroCountdown); // in the case the countdown is active
 	// Create new text node and replae old one
 	var newTextNode = document.createTextNode('25:00');
 	pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
