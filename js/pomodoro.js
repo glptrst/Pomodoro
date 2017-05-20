@@ -1,6 +1,5 @@
 "use strict"
 window.onload = function () {
-
     // Task 
     var task;
 
@@ -44,17 +43,21 @@ window.onload = function () {
 	    var plus = document.getElementById('pomodoroPlus');  
 	    plus.style.display = 'none';
 
-	    // Every second call updateDigits
-	    pomodoroCountdown = setInterval( function updateDigits() { 
+	    // Instead of simply using setInterval:
+	    // Accurate timer: https://stackoverflow.com/questions/29971898/how-to-create-an-accurate-timer-in-javascript
+	    var interval = 1000; //ms
+	    var expected = Date.now() + interval;
+	    setTimeout(step, interval);
+	    function step() {
+		var dt = Date.now() - expected; //the drift
+		if (dt > interval) {
+		    alert('An error occurred!');
+		}
 		// Update digits string
 		totalSeconds -= 1;
-		if (totalSeconds < 1) {
-		    // Stop calling updateDigits every second
-		    clearInterval(pomodoroCountdown);
-
+		if (totalSeconds < 0) {
 		    // Play a sound
 		    buzzer.play();
-
 		    // Insert task into done
 		    var noTaskDoneEl = document.getElementById('noTaskDone');
 		    if (noTaskDoneEl !== null)
@@ -63,6 +66,8 @@ window.onload = function () {
 		    var lastTaskDone = document.createElement('li');
 		    lastTaskDone.appendChild(document.createTextNode(task));
 		    doneList.appendChild(lastTaskDone);
+		    // Stop countdown
+		    return;
 		}
 		var newMinutes = Math.floor(totalSeconds / 60);
 		var newSeconds = totalSeconds % 60;
@@ -80,7 +85,10 @@ window.onload = function () {
 		pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
 		// Make new node the current node (so the replacement occurs correctly in the next call)
 		pomodoroDigitsTextNode = newTextNode;
-	    }, 1000);
+
+		expected += interval;
+		setTimeout(step, Math.max(0, interval - dt)); // take drift into account
+	    }
 	}
     });
 
@@ -108,7 +116,7 @@ window.onload = function () {
 	var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
 	clearInterval(pomodoroCountdown); // in the case the countdown is active
 	// Create new text node and replae old one
-	var newTextNode = document.createTextNode('00:02');
+	var newTextNode = document.createTextNode('25:00');
 	pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
     });
 
