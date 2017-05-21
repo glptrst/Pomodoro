@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 window.onload = function () {
     // Task 
     var task;
@@ -51,7 +51,11 @@ window.onload = function () {
 	    function step() {
 		var dt = Date.now() - expected; //the drift
 		if (dt > interval) {
-		    alert('An error occurred!');
+		    // if we are here ... 
+		    // probably the computer has been suspended without stopping the pomodoro
+		    // so we simply stop the pomodoro 
+		    pomodoroIsOn = false;
+		    return;
 		}
 		// Update digits string
 		totalSeconds -= 1;
@@ -172,4 +176,4 @@ window.onload = function () {
 	    pomodoroDigitsEl.replaceChild(decreased, pomodoroDigitsTextNode);
 	}
     });
-}
+};
