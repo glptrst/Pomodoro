@@ -1,5 +1,8 @@
 "use strict";
 window.onload = function () {
+
+    
+
     // Task 
     var task;
 
@@ -62,14 +65,23 @@ window.onload = function () {
 		if (totalSeconds < 0) {
 		    // Play a sound
 		    buzzer.play();
+		    // Get time when task is finished 
+		    var timeNow = new Date();
+		    var hours   = timeNow.getHours();
+		    var minutes = timeNow.getMinutes();
+		    var seconds = timeNow.getSeconds();
+		    var nowString = hours + ':' + minutes + ':' + seconds;
+
 		    // Insert task into done
 		    var noTaskDoneEl = document.getElementById('noTaskDone');
 		    if (noTaskDoneEl !== null)
 			noTaskDoneEl.remove();
 		    var doneList = document.getElementById('done');
 		    var lastTaskDone = document.createElement('li');
-		    lastTaskDone.appendChild(document.createTextNode(task));
+		    lastTaskDone.appendChild(document.createTextNode(task + ' - finished at ' + nowString));
 		    doneList.appendChild(lastTaskDone);
+
+
 		    // Stop countdown
 		    return;
 		}
