@@ -1,8 +1,5 @@
 "use strict";
 window.onload = function () {
-
-    
-
     // Task 
     var task;
 
@@ -15,6 +12,9 @@ window.onload = function () {
     // Flag for pomodoro
     var pomodoroIsOn = false;
 
+    // Store last button hit in form of string ('start', 'stop', 'reset')
+    var lastButtonHit = null;
+
     // Call startCountDown when pomodoro start button is clicked 
     document.getElementById("startPomodoro").addEventListener('click', function startCountDown() {
 	// Pomodoro digits html Element
@@ -24,14 +24,31 @@ window.onload = function () {
 	// Pomodoro digits string (nodevalue)
 	var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
 
+	// Store time when a pomodor begins
+	var beginningTime = null; 
+
 	if (pomodoroDigitsString === '00:00') { // If counter is 00.00
 	    ; // Do nothing
 	} else if (pomodoroIsOn) {
 	    ; // Do nothing
 	}
 	else { // Start pomodoro
+
 	    // Change flag
 	    pomodoroIsOn = true;
+
+	    //*****TODO******
+	    //if the pomodoro has been stopped the beginning time won't be correct 
+	    //***************
+
+	    // Set beginning time of pomodoro
+	    (function setBeginningTime() {
+		var timeNow = new Date();
+		var hours   = timeNow.getHours();
+		var minutes = timeNow.getMinutes();
+		var seconds = timeNow.getSeconds();
+		beginningTime = hours + ':' + minutes + ':' + seconds;
+	    })();
 
 	    // Set task variable
 	    task = document.getElementById('task').value;
@@ -78,9 +95,8 @@ window.onload = function () {
 			noTaskDoneEl.remove();
 		    var doneList = document.getElementById('done');
 		    var lastTaskDone = document.createElement('li');
-		    lastTaskDone.appendChild(document.createTextNode(task + ' - finished at ' + nowString));
+		    lastTaskDone.appendChild(document.createTextNode(task + ' - began at ' + beginningTime +  ' - finished at ' + nowString));
 		    doneList.appendChild(lastTaskDone);
-
 
 		    // Stop countdown
 		    return;
