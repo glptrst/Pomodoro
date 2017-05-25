@@ -11,6 +11,11 @@ window.onload = function () {
 
     // Flag for pomodoro
     var pomodoroIsOn = false;
+    // Flag for wheter pomodoro has been stopped or not
+    var pomodoroStopped = false;
+
+    // Store time when a pomodor begins
+    var beginningTime = null; 
 
     // Store last button hit in form of string ('start', 'stop', 'reset')
     var lastButtonHit = null;
@@ -24,9 +29,6 @@ window.onload = function () {
 	// Pomodoro digits string (nodevalue)
 	var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
 
-	// Store time when a pomodor begins
-	var beginningTime = null; 
-
 	if (pomodoroDigitsString === '00:00') { // If counter is 00.00
 	    ; // Do nothing
 	} else if (pomodoroIsOn) {
@@ -37,19 +39,16 @@ window.onload = function () {
 	    // Change flag
 	    pomodoroIsOn = true;
 
-	    //*****TODO******
-	    //if the pomodoro has been stopped the beginning time won't be correct 
-	    //***************
-
 	    // Set beginning time of pomodoro
-	    (function setBeginningTime() {
-		var timeNow = new Date();
-		var hours   = timeNow.getHours();
-		var minutes = timeNow.getMinutes();
-		var seconds = timeNow.getSeconds();
-		beginningTime = hours + ':' + minutes + ':' + seconds;
-	    })();
-
+	    if (pomodoroStopped === false) {
+		(function setBeginningTime() {
+		    var timeNow = new Date();
+		    var hours   = timeNow.getHours();
+		    var minutes = timeNow.getMinutes();
+		    var seconds = timeNow.getSeconds();
+		    beginningTime = hours + ':' + minutes + ':' + seconds;
+		})();
+	    }
 	    // Set task variable
 	    task = document.getElementById('task').value;
 
@@ -98,6 +97,8 @@ window.onload = function () {
 		    lastTaskDone.appendChild(document.createTextNode(task + ' - begun at ' + beginningTime +  ' - finished at ' + nowString));
 		    doneList.appendChild(lastTaskDone);
 
+		    pomodoroStopped = false;
+
 		    // Stop countdown
 		    return;
 		}
@@ -128,12 +129,14 @@ window.onload = function () {
     document.getElementById("stopPomodoro").addEventListener('click', function stopCountDown() {
 	clearTimeout(pomodoroCountdown);
 	pomodoroIsOn = false;
+	pomodoroStopped = true;
     });
 
     // Reset pomodoro when reset is clicked
     document.getElementById("resetPomodoro").addEventListener('click', function resetPomodoro() {
-	// Change flag
+	// Change flags
 	pomodoroIsOn = false;
+	pomodoroStopped = false;
 
 	// Make minus and plus buttons visible (in the case their display property was set to 'none')
 	var minus = document.getElementById('pomodoroMinus');  
