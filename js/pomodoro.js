@@ -94,7 +94,9 @@ window.onload = function () {
 			noTaskDoneEl.remove();
 		    var doneList = document.getElementById('done');
 		    var lastTaskDone = document.createElement('li');
-		    lastTaskDone.appendChild(document.createTextNode(task + ' - begun at ' + beginningTime +  ' - finished at ' + nowString));
+
+		    var stopped = pomodoroStopped ? 'yes' : 'no';
+		    lastTaskDone.appendChild(document.createTextNode(task + ' - begun at ' + beginningTime +  ' - finished at ' + nowString + ' - Stopped: ' + stopped));
 		    doneList.appendChild(lastTaskDone);
 
 		    pomodoroStopped = false;
