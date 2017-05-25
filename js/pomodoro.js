@@ -95,7 +95,7 @@ window.onload = function () {
 			noTaskDoneEl.remove();
 		    var doneList = document.getElementById('done');
 		    var lastTaskDone = document.createElement('li');
-		    lastTaskDone.appendChild(document.createTextNode(task + ' - began at ' + beginningTime +  ' - finished at ' + nowString));
+		    lastTaskDone.appendChild(document.createTextNode(task + ' - begun at ' + beginningTime +  ' - finished at ' + nowString));
 		    doneList.appendChild(lastTaskDone);
 
 		    // Stop countdown
