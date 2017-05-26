@@ -96,7 +96,7 @@ window.onload = function () {
 		    var lastTaskDone = document.createElement('li');
 
 		    var stopped = pomodoroStopped ? 'yes' : 'no';
-		    lastTaskDone.appendChild(document.createTextNode(task + ' - begun at ' + beginningTime +  ' - finished at ' + nowString + ' - Stopped: ' + stopped));
+		    lastTaskDone.appendChild(document.createTextNode(task + ' - Length: ' + pomodoroDigitsString +  ' - Stopped: ' + stopped + ' - Begun at ' + beginningTime +  ' - Finished at ' + nowString));
 		    doneList.appendChild(lastTaskDone);
 
 		    pomodoroStopped = false;
