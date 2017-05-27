@@ -213,19 +213,21 @@ window.onload = function () {
     // Clear list of finished tasks when button is clicked
     var clearList = document.getElementById('clearList'); 
     clearList.addEventListener('click', function clear(){
-	var listItems = document.querySelectorAll('#done li');
-	if (listItems.length > 0) {
-	    for (var i = 0; i < listItems.length; i++) {
-		listItems[i].remove();
-	    }
-	    
-	    var  noTaskDoneEl = document.createElement('div');
-	    noTaskDoneEl.appendChild(document.createTextNode('None'));
-	    noTaskDoneEl.setAttribute('class', 'text-center');
-	    noTaskDoneEl.setAttribute('id', 'noTaskDone');
+	if (window.confirm('Do you really want to clear the list?')) {
+	    var listItems = document.querySelectorAll('#done li');
+	    if (listItems.length > 0) {
+		for (var i = 0; i < listItems.length; i++) {
+		    listItems[i].remove();
+		}
 
-	    var doneList = document.getElementById('done'); 
-	    doneList.appendChild(noTaskDoneEl);
+		var  noTaskDoneEl = document.createElement('div');
+		noTaskDoneEl.appendChild(document.createTextNode('None'));
+		noTaskDoneEl.setAttribute('class', 'text-center');
+		noTaskDoneEl.setAttribute('id', 'noTaskDone');
+
+		var doneList = document.getElementById('done'); 
+		doneList.appendChild(noTaskDoneEl);
+	    }
 	}
     });
 };
