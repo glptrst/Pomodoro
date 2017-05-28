@@ -99,6 +99,45 @@ window.onload = function () {
 		    lastTaskDone.appendChild(document.createTextNode(task + ' - Length: ' + pomodoroDigitsString +  ' - Stopped: ' + stopped + ' - Begun at ' + beginningTime +  ' - Finished at ' + nowString));
 		    doneList.appendChild(lastTaskDone);
 
+
+		    //table test  ***************************************************
+		    //show table element (which is set to display: none when empty)
+		    var table = document.getElementById('doneTable');
+		    table.setAttribute('style', ' ');
+		    // new table row
+		    var newTr = document.createElement('tr');
+		    // new table datas to put into the new row
+		    //task
+		    var taskTd = document.createElement('td');  
+		    var taskText = document.createTextNode(task); 
+		    taskTd.appendChild(taskText);
+		    //length
+		    var lengthTd = document.createElement('td');  
+		    var lengthText = document.createTextNode(pomodoroDigitsString); 
+		    lengthTd.appendChild(lengthText);
+		    //stopped 
+		    var stoppedTd = document.createElement('td');  
+		    var stoppedText = document.createTextNode(stopped); 
+		    stoppedTd.appendChild(stoppedText);
+		    //begun at
+		    var begunAtTd = document.createElement('td');  
+		    var begunAtText = document.createTextNode(beginningTime); 
+		    begunAtTd.appendChild(begunAtText);
+		    //finished at
+		    var finishedAtTd = document.createElement('td');  
+		    var finishedAtText = document.createTextNode(nowString); 
+		    finishedAtTd.appendChild(finishedAtText);
+		    // Append tds as childs to tr
+		    newTr.appendChild(taskTd);
+		    newTr.appendChild(lengthTd);
+		    newTr.appendChild(stoppedTd);
+		    newTr.appendChild(begunAtTd);
+		    newTr.appendChild(finishedAtTd);
+		    // Append new tr to table
+		    var tableBody = document.getElementsByTagName('tbody')[0];
+		    tableBody.appendChild(newTr);
+		    //end table test ***********************************************
+
 		    pomodoroStopped = false;
 
 		    // Stop countdown
