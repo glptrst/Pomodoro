@@ -100,7 +100,10 @@ window.onload = function () {
 		    doneList.appendChild(lastTaskDone);
 
 
-		    //table test  ***************************************************
+		    // table test  ***************************************************
+		    
+		    // TODO: add number to rows
+		    
 		    //show table element (which is set to display: none when empty)
 		    var table = document.getElementById('doneTable');
 		    table.setAttribute('style', ' ');

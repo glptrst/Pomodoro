@@ -1,5 +1,5 @@
-h1 {
-    margin-bottom: 50px;
+margin {
+    h1-bottom: 50px;
 }
 
 #pomodoroClock {
@@ -15,4 +15,12 @@ h1 {
     width: 30%;
     margin: 0 auto;
     border-radius: 5px;
+}
+
+#tableDiv {
+    width: 70%;
+    margin: 0 auto;
+    border-color: #e5e5e0;
+    border-style: solid;
+    border-width: 1px;
 }
