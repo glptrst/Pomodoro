@@ -14,6 +14,9 @@ window.onload = function () {
     // Flag for wheter pomodoro has been stopped or not
     var pomodoroStopped = false;
 
+    // Store number of done pomodoros
+    var nthPomodoro = 0;
+    
     // Store time when a pomodor begins
     var beginningTime = null; 
 
@@ -36,11 +39,11 @@ window.onload = function () {
 	}
 	else { // Start pomodoro
 
-	    // Change flag
+	    // Change flag1
 	    pomodoroIsOn = true;
 
-	    // Set beginning time of pomodoro
 	    if (pomodoroStopped === false) {
+		// Set beginning time of pomodoro
 		(function setBeginningTime() {
 		    var timeNow = new Date();
 		    var hours   = timeNow.getHours();
@@ -48,6 +51,8 @@ window.onload = function () {
 		    var seconds = timeNow.getSeconds();
 		    beginningTime = hours + ':' + minutes + ':' + seconds;
 		})();
+		// Increase number of done pomodoros
+		nthPomodoro++;
 	    }
 	    // Set task variable
 	    task = document.getElementById('task').value;
@@ -110,6 +115,11 @@ window.onload = function () {
 		    // new table row
 		    var newTr = document.createElement('tr');
 		    // new table datas to put into the new row
+		    // ordinal number of pomodoro
+		    var numberTd = document.createElement('th');
+		    numberTd.setAttribute('scope', 'row');
+		    var numberText = document.createTextNode(String(nthPomodoro));
+		    numberTd.appendChild(numberText);
 		    //task
 		    var taskTd = document.createElement('td');  
 		    var taskText = document.createTextNode(task); 
@@ -131,6 +141,7 @@ window.onload = function () {
 		    var finishedAtText = document.createTextNode(nowString); 
 		    finishedAtTd.appendChild(finishedAtText);
 		    // Append tds as childs to tr
+		    newTr.appendChild(numberTd);
 		    newTr.appendChild(taskTd);
 		    newTr.appendChild(lengthTd);
 		    newTr.appendChild(stoppedTd);
