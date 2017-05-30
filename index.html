@@ -18,8 +18,8 @@
 
     <div>
 	<form class=form-inline>
-	<label for="task">Task</label>
-	<input type="text" class="form-control" id="task"
+	  <label for="task">Task</label>
+	  <input type="text" class="form-control" id="task"
 	       placeholder="Untitled" maxlength="10">
 	</form>
     </div>
@@ -38,46 +38,29 @@
 
 </div> <!-- pomodorClock -->
 
-    <div class="text-left" id="tasksList">
-      <h3 class="text-center">Tasks Done</h3>
-      <div class="text-center" id="noTaskDone">None</div>
-	<ol id="done">
-	</ol>
-    </div>
+<h2>Completed Tasks</h2>
+<div id="none">None</div>
+<!-- TABLE --> 
+<div id="tableDiv" style="display: none">
+  <table class="table table-striped">
 
-    <button type="button" class="btn btn-link" id="clearList">Clear
-    List</button>
+    <thead>
+      <tr>
+	<th>#</th>
+	<th>Task</th>
+	<th>Length</th>
+	<th>Stopped</th>
+	<th>Begun at</th>
+	<th>Finished at</th>
+      </tr>
+    </thead>
+    
+    <tbody>
 
-
-    <!-- TABLE --> 
-    <div id="tableDiv">
-	<table id="doneTable" class="table table-striped">
-	  
-
-	    <thead>
-	      <tr>
-		<th>#</th>
-		<th>Task</th>
-		<th>Length</th>
-		<th>Stopped</th>
-		<th>Begun at</th>
-		<th>Finished at</th>
-	      </tr>
-	    </thead>
-	    
-	    <tbody>
-	      <tr>
-		<th scope="row">1</th>
-		<td>Emacs</td>
-		<td>23:00</td>
-		<td>yes</td>
-		<td>08.00.00</td>
-		<td>08.23.00</td>
-	      </tr>
-	    </tbody>
-	</table>
-    </div>
-    <!-- END TABLE -->
+    </tbody>
+  </table>
+</div>
+<!-- END TABLE -->
 
 </div> <!-- container -->
 

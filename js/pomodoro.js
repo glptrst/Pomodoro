@@ -86,32 +86,21 @@ window.onload = function () {
 		if (totalSeconds < 0) {
 		    // Play a sound
 		    buzzer.play();
+
+		    // Remove 'none' from completed tasks
+		    var none = document.getElementById('none');
+		    none.remove();
+
 		    // Get time when task is finished 
 		    var timeNow = new Date();
 		    var hours   = timeNow.getHours();
 		    var minutes = timeNow.getMinutes();
 		    var seconds = timeNow.getSeconds();
 		    var nowString = hours + ':' + minutes + ':' + seconds;
-
-		    // Insert task into done
-		    var noTaskDoneEl = document.getElementById('noTaskDone');
-		    if (noTaskDoneEl !== null)
-			noTaskDoneEl.remove();
-		    var doneList = document.getElementById('done');
-		    var lastTaskDone = document.createElement('li');
-
-		    var stopped = pomodoroStopped ? 'yes' : 'no';
-		    lastTaskDone.appendChild(document.createTextNode(task + ' - Length: ' + pomodoroDigitsString +  ' - Stopped: ' + stopped + ' - Begun at ' + beginningTime +  ' - Finished at ' + nowString));
-		    doneList.appendChild(lastTaskDone);
-
-
-		    // table test  ***************************************************
-		    
-		    // TODO: add number to rows
 		    
 		    //show table element (which is set to display: none when empty)
-		    var table = document.getElementById('doneTable');
-		    table.setAttribute('style', ' ');
+		    var tableDiv = document.getElementById('tableDiv');
+		    tableDiv.setAttribute('style', ' ');
 		    // new table row
 		    var newTr = document.createElement('tr');
 		    // new table datas to put into the new row
@@ -129,6 +118,7 @@ window.onload = function () {
 		    var lengthText = document.createTextNode(pomodoroDigitsString); 
 		    lengthTd.appendChild(lengthText);
 		    //stopped 
+		    var stopped = pomodoroStopped ? 'yes' : 'no';
 		    var stoppedTd = document.createElement('td');  
 		    var stoppedText = document.createTextNode(stopped); 
 		    stoppedTd.appendChild(stoppedText);
@@ -150,7 +140,6 @@ window.onload = function () {
 		    // Append new tr to table
 		    var tableBody = document.getElementsByTagName('tbody')[0];
 		    tableBody.appendChild(newTr);
-		    //end table test ***********************************************
 
 		    pomodoroStopped = false;
 
@@ -260,27 +249,6 @@ window.onload = function () {
 	    // Create new text node and replace the old one
 	    var decreased = document.createTextNode(minutes + ':' + seconds);
 	    pomodoroDigitsEl.replaceChild(decreased, pomodoroDigitsTextNode);
-	}
-    });
-
-    // Clear list of finished tasks when button is clicked
-    var clearList = document.getElementById('clearList'); 
-    clearList.addEventListener('click', function clear(){
-	if (window.confirm('Do you really want to clear the list?')) {
-	    var listItems = document.querySelectorAll('#done li');
-	    if (listItems.length > 0) {
-		for (var i = 0; i < listItems.length; i++) {
-		    listItems[i].remove();
-		}
-
-		var  noTaskDoneEl = document.createElement('div');
-		noTaskDoneEl.appendChild(document.createTextNode('None'));
-		noTaskDoneEl.setAttribute('class', 'text-center');
-		noTaskDoneEl.setAttribute('id', 'noTaskDone');
-
-		var doneList = document.getElementById('done'); 
-		doneList.appendChild(noTaskDoneEl);
-	    }
 	}
     });
 };
