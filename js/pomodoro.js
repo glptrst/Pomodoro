@@ -88,7 +88,7 @@ window.onload = function () {
 		    buzzer.play();
 
 		    // Remove 'none' from completed tasks (if it's the first pomodoro to be completed)
-		    if (nthPomodoro === 0) {
+		    if (nthPomodoro === 1) {
 			var none = document.getElementById('none');
 			none.remove();
 		    }
