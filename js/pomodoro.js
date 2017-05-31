@@ -197,7 +197,7 @@ window.onload = function () {
 	var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
 	clearTimeout(pomodoroCountdown); // in the case the countdown is active
 	// Create new text node and replae old one
-	var newTextNode = document.createTextNode('00:02');
+	var newTextNode = document.createTextNode('25:00');
 	pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
     });
 
