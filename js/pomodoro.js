@@ -24,7 +24,29 @@ window.onload = function () {
     var lastButtonHit = null;
 
     // Call startCountDown when pomodoro start button is clicked 
-    document.getElementById("startPomodoro").addEventListener('click', function startCountDown() {
+    document.getElementById("startPomodoro").addEventListener('click', startCountDown);
+
+    // Stop countdown when stop is clicked 
+    document.getElementById("stopPomodoro").addEventListener('click', stopCountDown);
+
+    // Reset pomodoro when reset is clicked6
+    document.getElementById("resetPomodoro").addEventListener('click', resetPomodoro);
+
+    // Increase pomodoro by one minute when click on plus
+    document.getElementById("pomodoroPlus").addEventListener('click', increasePomodoro);
+
+    // Decrease pomodoro by one minute when click on minus
+    document.getElementById("pomodoroMinus").addEventListener('click', decreasePomodoro);
+
+    //TODO
+
+    // Start break
+
+    // Stop break
+
+    //reset break
+
+    function startCountDown() {
 	// Pomodoro digits html Element
 	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
 	// Pomodoro digits text node
@@ -168,17 +190,15 @@ window.onload = function () {
 		pomodoroCountdown = setTimeout(step, Math.max(0, interval - dt)); // take drift into account
 	    }
 	}
-    });
+    }
 
-    // Stop countdown when stop is clicked 
-    document.getElementById("stopPomodoro").addEventListener('click', function stopCountDown() {
+    function stopCountDown() {
 	clearTimeout(pomodoroCountdown);
 	pomodoroIsOn = false;
 	pomodoroStopped = true;
-    });
+    }
 
-    // Reset pomodoro when reset is clicked
-    document.getElementById("resetPomodoro").addEventListener('click', function resetPomodoro() {
+    function resetPomodoro() {
 	// Change flags
 	pomodoroIsOn = false;
 	pomodoroStopped = false;
@@ -199,10 +219,9 @@ window.onload = function () {
 	// Create new text node and replae old one
 	var newTextNode = document.createTextNode('25:00');
 	pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
-    });
+    }
 
-    // Increase pomodoro by one minute when click on plus
-    document.getElementById("pomodoroPlus").addEventListener('click', function increasePomodoro() {
+    function increasePomodoro() {
 	// Pomodoro digits html Element
 	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
 	// Pomodoro digits text node
@@ -225,10 +244,9 @@ window.onload = function () {
 	    var increased = document.createTextNode(minutes + ':' + seconds);
 	    pomodoroDigitsEl.replaceChild(increased, pomodoroDigitsTextNode);
 	}
-    });
+    }
 
-    // Decrease pomodoro by one minute when click on minus
-    document.getElementById("pomodoroMinus").addEventListener('click', function decreasePomodoro() {
+    function decreasePomodoro() {
 	// Pomodoro digits html Element
 	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
 	// Pomodoro digits text node
@@ -251,5 +269,5 @@ window.onload = function () {
 	    var decreased = document.createTextNode(minutes + ':' + seconds);
 	    pomodoroDigitsEl.replaceChild(decreased, pomodoroDigitsTextNode);
 	}
-    });
+    }
 };
