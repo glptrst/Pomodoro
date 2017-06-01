@@ -5,6 +5,7 @@ window.onload = function () {
 
     // Store timeoutID;
     var pomodoroCountdown;
+    var breakCountdown;
 
     // Sound
     var buzzer = document.getElementById('buzzer');
@@ -13,6 +14,9 @@ window.onload = function () {
     var pomodoroIsOn = false;
     // Flag for wheter pomodoro has been stopped or not
     var pomodoroStopped = false;
+
+    // Flag for break
+    var breakIsOn = false;
 
     // Store number of done pomodoros
     var nthPomodoro = 0;
@@ -25,29 +29,24 @@ window.onload = function () {
 
     // Call startCountDown when pomodoro start button is clicked 
     document.getElementById("startPomodoro").addEventListener('click', startCountDown);
-
     // Stop countdown when stop is clicked 
     document.getElementById("stopPomodoro").addEventListener('click', stopCountDown);
-
-    // Reset pomodoro when reset is clicked6
+    // Reset pomodoro when reset is clicked
     document.getElementById("resetPomodoro").addEventListener('click', resetPomodoro);
-
     // Increase pomodoro by one minute when click on plus
     document.getElementById("pomodoroPlus").addEventListener('click', increasePomodoro);
-
     // Decrease pomodoro by one minute when click on minus
     document.getElementById("pomodoroMinus").addEventListener('click', decreasePomodoro);
 
-    //TODO
-
-    // Start break
-
-    // Stop break
-
-    //reset break
+    // Call startBreak when break start button is clicked
+    document.getElementById("startBreak").addEventListener('click', startBreak);
+    // Call stopBreak when break stop button is clicked 
+    document.getElementById("stopPomodoro").addEventListener('click', stopBreak);
+    // Call resetBreak when break reset button is clicked
+    document.getElementById("resetPomodoro").addEventListener('click', resetBreak);
 
     function startCountDown() {
-	// Pomodoro digits html Element
+	// Pomodoro digits html element
 	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
 	// Pomodoro digits text node
 	var pomodoroDigitsTextNode = pomodoroDigitsEl.lastChild;  
@@ -56,12 +55,13 @@ window.onload = function () {
 
 	if (pomodoroDigitsString === '00:00') { // If counter is 00.00
 	    ; // Do nothing
-	} else if (pomodoroIsOn) {
+	}
+	else if (pomodoroIsOn) {
 	    ; // Do nothing
 	}
 	else { // Start pomodoro
 
-	    // Change flag1
+	    // Change flag
 	    pomodoroIsOn = true;
 
 	    if (pomodoroStopped === false) {
@@ -108,7 +108,6 @@ window.onload = function () {
 		if (totalSeconds < 0) {
 		    // Play a sound
 		    buzzer.play();
-
 		    // Remove 'none' from completed tasks (if it's the first pomodoro to be completed)
 		    if (nthPomodoro === 1) {
 			var none = document.getElementById('none');
@@ -269,5 +268,77 @@ window.onload = function () {
 	    var decreased = document.createTextNode(minutes + ':' + seconds);
 	    pomodoroDigitsEl.replaceChild(decreased, pomodoroDigitsTextNode);
 	}
+    }
+
+    function startBreak() {
+	// Break digits html element
+	var breakDigitsEl = document.getElementById("breakDigits");
+	// Break digits text node
+	var breakDigitsTextNode = breakDigitsEl.lastChild;
+	// Break digits string (node vaue)
+	var breakDigitsString = breakDigitsTextNode.nodeValue;
+
+	if (breakDigitsString === '00:00') {
+	    ; // Do nothing
+	}
+	else if (breakIsOn) { //TODO*************************************
+	    ; // Do nothing
+	}
+	else { // Start break
+	    // Change flag
+	    breakIsOn = true;
+
+	    var minutes = Number(breakDigitsString.slice(0,2)); 
+	    var seconds = Number(breakDigitsString.slice(3,5));
+	    var totalSeconds = minutes*60 + seconds;
+
+	    var interval = 1000; //ms
+	    var expected = Date.now() + interval;
+	    breakCountdown = setTimeout(step, interval);
+	    function step() {
+		var dt = Date.now() - expected; //the drift
+		if (dt > interval) {
+		    // something bad happened
+		    // let's stop the break
+		    breakIsOn = false;
+		    return;
+		}
+		// Update digits string
+		totalSeconds -= 1;
+		if (totalSeconds < 0) {
+		    // Play a sound
+		    buzzer.play();
+		    // Stop break
+		    return;
+		}
+		var newMinutes = Math.floor(totalSeconds / 60);
+		var newSeconds = totalSeconds % 60;
+		// Always display minutes and seconds in a two-digit format
+		if (String(newMinutes).length < 2)
+		    newMinutes = '0' + newMinutes;
+		if (String(newSeconds).length < 2)
+		    newSeconds = '0' + newSeconds;
+		// Create updated digits string 
+		var newDigitsString = newMinutes + ':' + newSeconds;
+		// **********Change string in the page**********
+		// Create new text node
+		var newTextNode = document.createTextNode(newDigitsString);
+		// Replace old text node with the new one
+		breakDigitsEl.replaceChild(newTextNode, breakDigitsTextNode);
+		// Make new node the current node (so the replacement occurs correctly in the next call)
+		breakDigitsTextNode = newTextNode;
+
+		expected += interval;
+		breakCountdown = setTimeout(step, Math.max(0, interval - dt)); // take drift into account
+	    }
+	}
+    }
+
+    function stopBreak() {
+
+    }
+
+    function resetBreak() {
+
     }
 };
