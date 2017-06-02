@@ -41,9 +41,9 @@ window.onload = function () {
     // Call startBreak when break start button is clicked
     document.getElementById("startBreak").addEventListener('click', startBreak);
     // Call stopBreak when break stop button is clicked 
-    document.getElementById("stopPomodoro").addEventListener('click', stopBreak);
+    document.getElementById("stopBreak").addEventListener('click', stopBreak);
     // Call resetBreak when break reset button is clicked
-    document.getElementById("resetPomodoro").addEventListener('click', resetBreak);
+    document.getElementById("resetBreak").addEventListener('click', resetBreak);
 
     function startCountDown() {
 	// Pomodoro digits html element
@@ -335,10 +335,22 @@ window.onload = function () {
     }
 
     function stopBreak() {
-
+	clearTimeout(breakCountdown);
+	breakIsOn = false;
     }
 
     function resetBreak() {
-
+	// Change flag
+	breakIsOn = false;
+	// Break digits html Element
+	var breakDigitsEl = document.getElementById("breakDigits"); 
+	// Break digits text node
+	var breakDigitsTextNode = breakDigitsEl.lastChild;  
+	// Break digits string (nodevalue)
+	var breakDigitsString = breakDigitsTextNode.nodeValue;
+	clearTimeout(breakCountdown); // in the case the countdown is active
+	// Create new text node and replae old one
+	var newTextNode = document.createTextNode('05:00');
+	breakDigitsEl.replaceChild(newTextNode, breakDigitsTextNode);
     }
 };
