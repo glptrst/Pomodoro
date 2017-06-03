@@ -109,10 +109,10 @@ window.onload = function () {
 		    // Play a sound
 		    buzzer.play();
 		    // Remove 'none' from completed tasks (if it's the first pomodoro to be completed)
-		    if (nthPomodoro === 1) {
-			var none = document.getElementById('none');
+		    var none = document.getElementById('none');
+		    if (none !== null)
 			none.remove();
-		    }
+
 		    // Get time when task is finished 
 		    var timeNow = new Date();
 		    var hours   = timeNow.getHours();
@@ -216,7 +216,7 @@ window.onload = function () {
 	var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
 	clearTimeout(pomodoroCountdown); // in the case the countdown is active
 	// Create new text node and replae old one
-	var newTextNode = document.createTextNode('25:00');
+	var newTextNode = document.createTextNode('00:02');
 	pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
     }
 
