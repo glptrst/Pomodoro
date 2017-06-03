@@ -73,8 +73,6 @@ window.onload = function () {
 		    var seconds = timeNow.getSeconds();
 		    beginningTime = hours + ':' + minutes + ':' + seconds;
 		})();
-		// Increase number of done pomodoros
-		nthPomodoro++;
 	    }
 	    // Set task variable
 	    task = document.getElementById('task').value;
@@ -112,6 +110,9 @@ window.onload = function () {
 		    var none = document.getElementById('none');
 		    if (none !== null)
 			none.remove();
+
+		    // Increase number of done pomodoros
+		    nthPomodoro++;
 
 		    // Get time when task is finished 
 		    var timeNow = new Date();
@@ -216,7 +217,7 @@ window.onload = function () {
 	var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
 	clearTimeout(pomodoroCountdown); // in the case the countdown is active
 	// Create new text node and replae old one
-	var newTextNode = document.createTextNode('00:02');
+	var newTextNode = document.createTextNode('25:00');
 	pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
     }
 
