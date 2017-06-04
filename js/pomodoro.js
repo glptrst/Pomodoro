@@ -316,6 +316,10 @@ window.onload = function () {
 		if (totalSeconds < 0) {
 		    // Play a sound
 		    buzzer.play();
+
+		    // reset break back to 05:00
+		    breakDigitsEl.replaceChild(document.createTextNode('05:00'), breakDigitsTextNode);
+		    
 		    // Stop break
 		    return;
 		}
