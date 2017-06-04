@@ -166,6 +166,13 @@ window.onload = function () {
 
 		    pomodoroStopped = false;
 
+		    // Set pomodor back to 25:00 and show minus and plus buttons
+		    pomodoroDigitsEl.replaceChild(document.createTextNode('25:00'), pomodoroDigitsTextNode);
+		    var minus = document.getElementById('pomodoroMinus');  
+		    minus.style.display = '';
+		    var plus = document.getElementById('pomodoroPlus');  
+		    plus.style.display = '';		    
+
 		    // Stop countdown
 		    return;
 		}
