@@ -1,4 +1,4 @@
-"use strict";
+ "use strict";
 window.onload = function () {
     // Task 
     var task;
@@ -10,9 +10,11 @@ window.onload = function () {
     // Sound
     var buzzer = document.getElementById('buzzer');
 
-    // Flag for pomodoro
+    // Flaf for whether pomodoro or break is shown on the page
+    var pomodoroIsShown = true;
+    // Flag for whether pomodoro is on or off 
     var pomodoroIsOn = false;
-    // Flag for wheter pomodoro has been stopped or not
+    // Flag for whether pomodoro has been stopped or not
     var pomodoroStopped = false;
 
     // Flag for break
@@ -26,6 +28,11 @@ window.onload = function () {
 
     // Store last button hit in form of string ('start', 'stop', 'reset')
     var lastButtonHit = null;
+
+    var selectPomodoroButton = document.getElementById(selectPomodoro);
+    var selectBreakButton = document.getElementById(selectBreak);
+    selectPomodoro.addEventListener('click', showPomodoro);
+    selectBreak.addEventListener('click', showBreak);
 
     // Call startCountDown when pomodoro start button is clicked 
     document.getElementById("startPomodoro").addEventListener('click', startCountDown);
@@ -364,5 +371,40 @@ window.onload = function () {
 	// Create new text node and replae old one
 	var newTextNode = document.createTextNode('05:00');
 	breakDigitsEl.replaceChild(newTextNode, breakDigitsTextNode);
+    }
+
+    function showPomodoro() {
+	var pomodoroDiv = document.getElementById('pomodoroClock');
+	var breakDiv = document.getElementById('breakClock');
+
+	if (pomodoroIsShown) {
+	    ; // nothing to do
+	} else {
+	    pomodoroIsShown = true;
+	    breakDiv.setAttribute('class', 'animated fadeOut');
+	    setTimeout(function() {
+		pomodoroDiv.setAttribute('style', ' ');
+		breakDiv.setAttribute('style', 'display: none');
+		pomodoroDiv.setAttribute('class', 'animated fadeIn');
+	    }, 1000);
+	}
+	
+    }
+
+    function showBreak() {
+	var pomodoroDiv = document.getElementById('pomodoroClock');
+	var breakDiv = document.getElementById('breakClock');
+
+	if (!pomodoroIsShown) {
+	    ; // nothing to do
+	} else {
+	    pomodoroIsShown = false;
+	    pomodoroDiv.setAttribute('class', 'animated fadeOut');
+	    setTimeout(function() {
+		breakDiv.setAttribute('style', ' ');
+		pomodoroDiv.setAttribute('style', 'display: none');
+		breakDiv.setAttribute('class', 'animated fadeIn');
+	    }, 1000);
+	}
     }
 };
