@@ -171,6 +171,7 @@ window.onload = function () {
 		    var tableBody = document.getElementsByTagName('tbody')[0];
 		    tableBody.appendChild(newTr);
 
+		    pomodoroIsOn = false;
 		    pomodoroStopped = false;
 
 		    // Set pomodor back to 25:00 and show minus and plus buttons
@@ -180,9 +181,14 @@ window.onload = function () {
 		    var plus = document.getElementById('pomodoroPlus');  
 		    plus.style.display = '';		    
 
+		    // Show break clock
+		    showBreak();
+
 		    // Stop countdown
 		    return;
 		}
+
+				
 		var newMinutes = Math.floor(totalSeconds / 60);
 		var newSeconds = totalSeconds % 60;
 		// Always display minutes and seconds in a two-digit format
@@ -326,7 +332,11 @@ window.onload = function () {
 
 		    // reset break back to 05:00
 		    breakDigitsEl.replaceChild(document.createTextNode('05:00'), breakDigitsTextNode);
-		    
+
+		    // Show pomodoro clock
+		    showPomodoro();
+
+		    breakIsOn = false;
 		    // Stop break
 		    return;
 		}
