@@ -396,7 +396,7 @@ window.onload = function () {
 		pomodoroDiv.setAttribute('style', ' ');
 		breakDiv.setAttribute('style', 'display: none');
 		pomodoroDiv.setAttribute('class', 'animated fadeIn');
-	    }, 1000);
+	    }, 500);
 	}
 	
     }
@@ -414,7 +414,7 @@ window.onload = function () {
 		breakDiv.setAttribute('style', ' ');
 		pomodoroDiv.setAttribute('style', 'display: none');
 		breakDiv.setAttribute('class', 'animated fadeIn');
-	    }, 1000);
+	    }, 500);
 	}
     }
 };
