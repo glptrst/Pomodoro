@@ -219,34 +219,27 @@ window.onload = function () {
     }
 
     function resetPomodoro() {
-	var userConfirm = window.confirm("Your pomodoro progress will be lost, are you sure?");
-	if (userConfirm) {
-	    // Change flags
-	    pomodoroIsOn = false;
-	    pomodoroStopped = false;
+	// Change flags
+	pomodoroIsOn = false;
+	pomodoroStopped = false;
 
-	    // Make minus and plus buttons visible (in the case their display property was set to 'none')
-	    var minus = document.getElementById('pomodoroMinus');  
-	    minus.style.display = '';
-	    var plus = document.getElementById('pomodoroPlus');  
-	    plus.style.display = '';
+	// Make minus and plus buttons visible (in the case their display property was set to 'none')
+	var minus = document.getElementById('pomodoroMinus');  
+	minus.style.display = '';
+	var plus = document.getElementById('pomodoroPlus');  
+	plus.style.display = '';
 
-	    // Pomodoro digits html Element
-	    var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
-	    // Pomodoro digits text node
-	    var pomodoroDigitsTextNode = pomodoroDigitsEl.lastChild;  
-	    // Pomodoro digits string (nodevalue)
-	    var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
-	    clearTimeout(pomodoroCountdown); // in the case the countdown is active
-	    // Create new text node and replae old one
-	    var newTextNode = document.createTextNode('25:00');
-	    pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
-	} else {
-	    // make pomodoro keep going
-	    pomodoroIsOn = false;
-	    startCountDown();
-	}
-    }
+	// Pomodoro digits html Element
+	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
+	// Pomodoro digits text node
+	var pomodoroDigitsTextNode = pomodoroDigitsEl.lastChild;  
+	// Pomodoro digits string (nodevalue)
+	var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
+	clearTimeout(pomodoroCountdown); // in the case the countdown is active
+	// Create new text node and replae old one
+	var newTextNode = document.createTextNode('25:00');
+	pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
+    } 
 
     function increasePomodoro() {
 	// Pomodoro digits html Element
