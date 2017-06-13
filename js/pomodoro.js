@@ -1,5 +1,9 @@
  "use strict";
 window.onload = function () {
+
+    //disable Enter when focus is on the text area
+    disableKeys();
+    
     // Task 
     var task;
 
@@ -416,5 +420,16 @@ window.onload = function () {
 		breakDiv.setAttribute('class', 'animated fadeIn');
 	    }, 500);
 	}
+    }
+
+    function disableKeys() {
+	//select text area
+	var textArea = document.querySelector("input");
+	//disable Enter
+	textArea.addEventListener("keydown", function(event) {
+            if (event.keyCode == 13) {
+		event.preventDefault(); 
+            }
+	});
     }
 };
