@@ -24,8 +24,8 @@ window.onload = function () {
     // Store last button (string) hit in form of string ('start', 'stop', 'reset')
     var lastButtonHit = null;
 
-    // Call startPomodoro when pomodoro start button is clicked 
-    document.getElementById("startPomodoro").addEventListener('click', startPomodoro);
+    // Call activatePomodoro when pomodoro start button is clicked 
+    document.getElementById("startPomodoro").addEventListener('click', activatePomodoro);
     // Stop countdown when stop is clicked 
     document.getElementById("stopPomodoro").addEventListener('click', stopCountDown);
     // Reset pomodoro when reset is clicked
@@ -46,7 +46,8 @@ window.onload = function () {
     document.getElementById('selectPomodoro').addEventListener('click', showPomodoro);
     document.getElementById('selectBreak').addEventListener('click', showBreak);
 
-    function startPomodoro() {
+    //Activate pomodoro clock (the countdown starts only if the conditions are met)
+    function activatePomodoro() {
 	// Pomodoro digits html element
 	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
 	// Pomodoro digits text node
@@ -71,6 +72,7 @@ window.onload = function () {
 	}
     }
 
+    // start pomodoro countdown
     function startCountDown() {
 	// Hide minus and plus
 	var minus = document.getElementById('pomodoroMinus');  
@@ -133,12 +135,14 @@ window.onload = function () {
 	}
     }
 
+    // stop pomodoro countdown
     function stopCountDown() {
 	clearTimeout(pomodoroCountdown);
 	pomodoroIsOn = false;
 	pomodoroStopped = true;
     }
 
+    // reset pomodoro clock to default settings
     function resetPomodoro() {
 	// Change flags
 	pomodoroIsOn = false;
@@ -162,6 +166,7 @@ window.onload = function () {
 	pomodoroDigitsEl.replaceChild(newTextNode, pomodoroDigitsTextNode);
     } 
 
+    // play a sound, reset the pomodoro and show break clock
     function ultimateCountdown() {
 	// Play sound
 	buzzer.play();
@@ -175,7 +180,8 @@ window.onload = function () {
 	// Show break clock
 	showBreak();
     }
-    
+
+    // increase minutes of next pomodoro by one
     function increasePomodoro() {
 	// Pomodoro digits html Element
 	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
@@ -201,6 +207,7 @@ window.onload = function () {
 	}
     }
 
+    // decrease minutes of next pomodoro by one
     function decreasePomodoro() {
 	// Pomodoro digits html Element
 	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
@@ -226,6 +233,7 @@ window.onload = function () {
 	}
     }
 
+    // start break clock
     function startBreak() {
 	// Break digits html element
 	var breakDigitsEl = document.getElementById("breakDigits");
@@ -298,11 +306,13 @@ window.onload = function () {
 	}
     }
 
+    // stop break clock
     function stopBreak() {
 	clearTimeout(breakCountdown);
 	breakIsOn = false;
     }
 
+    // reset break clock 
     function resetBreak() {
 	// Change flag
 	breakIsOn = false;
@@ -318,6 +328,7 @@ window.onload = function () {
 	breakDigitsEl.replaceChild(newTextNode, breakDigitsTextNode);
     }
 
+    // show pomodoro clock in the page and hide break clock
     function showPomodoro() {
 	var pomodoroDiv = document.getElementById('pomodoroClock');
 	var breakDiv = document.getElementById('breakClock');
@@ -336,6 +347,7 @@ window.onload = function () {
 	
     }
 
+    // show break clock in the page and hide pomodoro clock 
     function showBreak() {
 	var pomodoroDiv = document.getElementById('pomodoroClock');
 	var breakDiv = document.getElementById('breakClock');
@@ -371,6 +383,7 @@ window.onload = function () {
 	var minutes = timeNow.getMinutes();
 	var seconds = timeNow.getSeconds();
 
+	//make sure two digits
 	if (hours.length < 2)
 	    hours = '0' + hours;
 	if (minutes.lenght < 2)
@@ -383,6 +396,7 @@ window.onload = function () {
 	return time;
     }
 
+    // update list of finished tasks inserting last pomodoro done
     function updateTasksDone() {
 	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
 	var pomodoroDigitsTextNode = pomodoroDigitsEl.lastChild;  
