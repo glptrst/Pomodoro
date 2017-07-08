@@ -6,7 +6,7 @@ A pomodoro technique app
 
 with firefox:
 
-* pomodoros stops alone randomly (!?) :O
+* pomodoro stops alone randomly (!?) :O
 
 * no sounds:
 
