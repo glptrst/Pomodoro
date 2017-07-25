@@ -1,6 +1,7 @@
-# pomodoro
+# pomodoro -- freecodecamp project
 A pomodoro technique app
 
+https://glptrst.github.io/pomodoro/
 
 ## bugs
 
