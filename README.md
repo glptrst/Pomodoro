@@ -5,6 +5,8 @@ https://glptrst.github.io/pomodoro/
 
 ## bugs
 
+* The length in the completed tasks table does not store the correct value!?
+
 with firefox:
 
 * pomodoro stops alone randomly (!?) :O
