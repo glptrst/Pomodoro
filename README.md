@@ -6,6 +6,8 @@ https://glptrst.github.io/pomodoro/
 ## bugs
 
 * The length in the completed tasks table does not store the correct value!?
+FIXED
+
 
 with firefox:
 
