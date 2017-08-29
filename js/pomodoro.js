@@ -46,14 +46,18 @@ window.onload = function () {
     document.getElementById('selectPomodoro').addEventListener('click', showPomodoro);
     document.getElementById('selectBreak').addEventListener('click', showBreak);
 
+    // Pomodoro digits html element
+    var pomodoroDigitsEl;
+    // Pomodoro digits text node
+    var pomodoroDigitsTextNode;
+    // Pomodoro digits string (nodevalue)
+    var pomodoroDigitsString;
+
     //Activate pomodoro clock (the countdown starts only if the conditions are met)
     function activatePomodoro() {
-	// Pomodoro digits html element
-	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
-	// Pomodoro digits text node
-	var pomodoroDigitsTextNode = pomodoroDigitsEl.lastChild;  
-	// Pomodoro digits string (nodevalue)
-	var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
+	pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
+	pomodoroDigitsTextNode = pomodoroDigitsEl.lastChild;  
+	pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
 
 	if (pomodoroDigitsString === '00:00') { // If counter is 00.00
 	    ; // Do nothing
@@ -398,9 +402,10 @@ window.onload = function () {
 
     // update list of finished tasks inserting last pomodoro done
     function updateTasksDone() {
-	var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
-	var pomodoroDigitsTextNode = pomodoroDigitsEl.lastChild;  
-	var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
+	// var pomodoroDigitsEl = document.getElementById("pomodoroDigits"); 
+	// var pomodoroDigitsTextNode = pomodoroDigitsEl.lastChild;  
+	// var pomodoroDigitsString = pomodoroDigitsTextNode.nodeValue;
+
 	// Get time when task is finished 
 	var nowString = getTime();
 
