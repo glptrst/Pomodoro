@@ -183,6 +183,8 @@ window.onload = function () {
 
 	// Show break clock
 	showBreak();
+	// Start break   #TODO#: makes this optional
+	startBreak();
     }
 
     // increase minutes of next pomodoro by one
