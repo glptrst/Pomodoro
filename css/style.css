@@ -14,3 +14,11 @@ margin {
     width: 50%;
     margin: 0 auto;
 }
+
+#pomodoroDigits {
+    font-size: 70;
+}
+
+#breakDigits {
+    font-size: 70;    
+}
