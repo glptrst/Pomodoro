@@ -10,6 +10,11 @@ margin {
     margin: 50px;
 }
 
+#taskName {
+    width: 50%;
+    margin: 0 auto;
+}
+
 #tableDiv {
     width: 50%;
     margin: 0 auto;

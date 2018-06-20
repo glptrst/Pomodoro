@@ -1,87 +1,89 @@
 <DOCTYPE>
 
-<html>
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/animate.min.css">
-    <link rel="stylesheet" href="css/style.css"> 
-    <script src="js/pomodoro.js"></script>
-    <title>Pomodoro App</title>
-    <audio id="buzzer" src="sounds/buzzer.mp3" type="audio/mpeg"></audio>
-</head>
-<body>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<div class="container-fluid text-center">
-<h1>Pomodoro App</h1>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+      <link rel="stylesheet" href="css/animate.min.css">
+      <link rel="stylesheet" href="css/style.css"> 
+      <script src="js/pomodoro.js"></script>
+      <title>Pomodoro App</title>
+      <audio id="buzzer" src="sounds/buzzer.mp3" type="audio/mpeg"></audio>
+    </head>
+    <body>
+
+      <div class="container-fluid text-center">
+	<h1>Pomodoro App</h1>
 
 
-<button id="selectPomodoro" class="button">Pomodoro</button>
-<button id="selectBreak" class="button">Break</button>
+	<button id="selectPomodoro" class="button">Pomodoro</button>
+	<button id="selectBreak" class="button">Break</button>
 
 
-<div id="pomodoroClock">
-  <h2>Pomodoro</h2>
+	<div id="pomodoroClock">
+	  <h2>Pomodoro</h2>
 
-    <div>
-	<form class=form-inline>
-	  <label for="task">Task</label>
-	  <input type="text" class="form-control" autofocus id="task"
-	       placeholder="Untitled" maxlength="50">
-	</form>
-    </div>
-  
-    <button type="button" class="btn btn-success" id="startPomodoro">Start</button>
 
-    <a class="btn btn-default" id="pomodoroMinus">-</a>
-    <span id="pomodoroDigits">25:00</span>
-    <a class="btn btn-default" id="pomodoroPlus">+</a>
-  
-    <button type="button" class="btn btn-warning" id="stopPomodoro">stop</button>
+	  <div id="taskName">
+	    <input type="text" class="form-control" autofocus id="task"
+		   placeholder="Task name" maxlength="100">
+	  </div>
 
-    <div>
-	<button type="button" class="btn btn-danger" id="resetPomodoro">Reset</button>
-    </div>
 
-</div> <!-- pomodorClock -->
+	  <a class="btn btn-default" id="pomodoroMinus">-</a>
+	  <span id="pomodoroDigits">25:00</span>
+	  <a class="btn btn-default" id="pomodoroPlus">+</a>
 
-<div id="breakClock" style="display: none">
-  <h2>Break</h2>
-  <button type="button" class="btn btn-success" id="startBreak">Start</button>
-  <span id="breakDigits">05:00</span>
-  <button type="button" class="btn btn-warning" id="stopBreak">Stop</button>
-  <div>
-    <button type="button" class="btn btn-danger" id="resetBreak">Reset</button>
-  </div>
-</div>
+	  </br>
 
-<h2>Completed Tasks</h2>
-<div id="none">None</div>
-<!-- TABLE --> 
-<div id="tableDiv" style="display: none">
-  <table class="table table-striped">
 
-    <thead>
-      <tr>
-	<th>#</th>
-	<th>Task</th>
-	<th>Length</th>
-	<th>Stopped</th>
-	<th>Begun at</th>
-	<th>Finished at</th>
-      </tr>
-    </thead>
-    
-    <tbody>
+	  <button type="button" class="btn btn-success" id="startPomodoro">Start</button>	  
+	  <button type="button" class="btn btn-warning" id="stopPomodoro">stop</button>
+	  <button type="button" class="btn btn-danger" id="resetPomodoro">Reset</button>
 
-    </tbody>
-  </table>
-</div>
-<!-- END TABLE -->
 
-</div> <!-- container -->
+	</div> <!-- pomodorClock -->
 
-</body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-</html>
+	<div id="breakClock" style="display: none">
+	  <h2>Break</h2>
+	  <button type="button" class="btn btn-success" id="startBreak">Start</button>
+	  <span id="breakDigits">05:00</span>
+	  <button type="button" class="btn btn-warning" id="stopBreak">Stop</button>
+	  <div>
+	    <button type="button" class="btn btn-danger" id="resetBreak">Reset</button>
+	  </div>
+	</div>
+
+	<h2>Completed Tasks</h2>
+	<div id="none">None</div>
+	<!-- TABLE --> 
+	<div id="tableDiv" style="display: none">
+	  <table class="table table-striped">
+
+	    <thead>
+	      <tr>
+		<th>#</th>
+		<th>Task</th>
+		<th>Length</th>
+		<th>Stopped</th>
+		<th>Begun at</th>
+		<th>Finished at</th>
+	      </tr>
+	    </thead>
+	    
+	    <tbody>
+
+	    </tbody>
+	  </table>
+	</div>
+	<!-- END TABLE -->
+
+      </div> <!-- container -->
+
+    </body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </html>
